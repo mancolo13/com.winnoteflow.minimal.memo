@@ -32,27 +32,26 @@ class _MainScreenState extends State<MainScreen> {
         backgroundColor: AppTheme.surfaceColor,
         indicatorColor: AppTheme.primaryColor.withValues(alpha: 0.2),
         destinations: [
-        NavigationDestination(
-          icon: const Icon(Icons.note_alt_outlined),
-          selectedIcon: const Icon(Icons.note_alt, color: AppTheme.primaryColor),
-          label: 'Notes',
-        ),
-        NavigationDestination(
-          icon: const Icon(Icons.dashboard_outlined),
-          selectedIcon: const Icon(Icons.dashboard, color: AppTheme.primaryColor),
-          label: 'Canvas',
-        ),
-        NavigationDestination(
-          icon: const Icon(Icons.label_outline),
-          selectedIcon: const Icon(Icons.label, color: AppTheme.primaryColor),
-          label: 'Tags',
-        ),
-        NavigationDestination(
-          icon: const Icon(Icons.favorite_border),
-          selectedIcon: const Icon(Icons.favorite, color: AppTheme.primaryColor),
-          label: 'Favorites',
-        ),
-
+          NavigationDestination(
+            icon: const Icon(Icons.notes_outlined),
+            selectedIcon: const Icon(Icons.notes, color: AppTheme.primaryColor),
+            label: 'Scratchpad',
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.folder_outlined),
+            selectedIcon: const Icon(Icons.folder, color: AppTheme.primaryColor),
+            label: 'Notebooks',
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.checklist_outlined),
+            selectedIcon: const Icon(Icons.checklist, color: AppTheme.primaryColor),
+            label: 'Checklist',
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.cloud_sync_outlined),
+            selectedIcon: const Icon(Icons.cloud_sync, color: AppTheme.primaryColor),
+            label: 'Sync',
+          ),
         ],
       ),
     );

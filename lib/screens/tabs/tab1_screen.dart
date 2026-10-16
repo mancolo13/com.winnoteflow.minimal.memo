@@ -2,25 +2,18 @@ import 'package:flutter/material.dart';
 import '../../theme/app_theme.dart';
 import '../../services/routing_service.dart';
 
-class Tab1Screen extends StatefulWidget {
+
+class Tab1Screen extends StatelessWidget {
   const Tab1Screen({super.key});
-
-  @override
-  State<Tab1Screen> createState() => _Tab1ScreenState();
-}
-
-class _Tab1ScreenState extends State<Tab1Screen> {
-  int _score = 92;
-  bool _active = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Win • Notes'),
+        title: const Text('Win • NoteFlow'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.stars_rounded, color: AppTheme.primaryColor),
+            icon: const Icon(Icons.edit_note, color: AppTheme.primaryColor),
             onPressed: () => RoutingService.openRegistrationUrl(),
           ),
         ],
@@ -29,83 +22,54 @@ class _Tab1ScreenState extends State<Tab1Screen> {
         padding: const EdgeInsets.all(16),
         children: [
           Container(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(18),
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [AppTheme.primaryColor.withValues(alpha: 0.3), AppTheme.surfaceColor],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: AppTheme.primaryColor.withValues(alpha: 0.4)),
+              color: AppTheme.surfaceColor,
+              borderRadius: BorderRadius.circular(18),
+              border: Border.all(color: AppTheme.primaryColor.withValues(alpha: 0.3)),
             ),
-            child: Column(
+            child: const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Notes Health', style: const TextStyle(fontSize: 16, color: Colors.white70)),
-                    Switch(
-                      value: _active,
-                      activeThumbColor: AppTheme.primaryColor,
-                      onChanged: (v) => setState(() => _active = v),
-                    ),
+                    Text('PINNED MEMO', style: TextStyle(color: AppTheme.secondaryColor, fontWeight: FontWeight.bold, fontSize: 11, letterSpacing: 1.2)),
+                    Icon(Icons.push_pin, color: AppTheme.primaryColor, size: 16),
                   ],
                 ),
-                const SizedBox(height: 12),
-                Text('$_score%', style: const TextStyle(fontSize: 48, fontWeight: FontWeight.bold)),
-                const SizedBox(height: 8),
-                LinearProgressIndicator(
-                  value: 0.92,
-                  backgroundColor: Colors.white12,
-                  color: AppTheme.primaryColor,
-                  minHeight: 8,
-                  borderRadius: BorderRadius.circular(4),
-                ),
+                SizedBox(height: 8),
+                Text('Quarterly Launch Objectives', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
+                SizedBox(height: 6),
+                Text('• Finalize mobile app store deployment assets\n• Verify backend endpoint response latency < 120ms\n• Deliver sprint report to stakeholders by Friday', style: TextStyle(color: Colors.white70, height: 1.4)),
               ],
             ),
           ),
           const SizedBox(height: 16),
-          Row(
-            children: [
-              Expanded(child: _buildMetric('Total', '1,840', Icons.analytics)),
-              const SizedBox(width: 12),
-              Expanded(child: _buildMetric('Active', '99.2%', Icons.speed)),
-            ],
-          ),
-          const SizedBox(height: 16),
-          ...List.generate(3, (i) => Card(
-            color: AppTheme.surfaceColor,
-            margin: const EdgeInsets.only(bottom: 10),
-            child: ListTile(
-              leading: CircleAvatar(
-                backgroundColor: AppTheme.primaryColor.withValues(alpha: 0.2),
-                child: Icon(Icons.check, color: AppTheme.primaryColor),
-              ),
-              title: Text('Notes Priority ${i + 1}'),
-              subtitle: Text('Progress: Normal • Level ${i + 1}'),
-              trailing: const Icon(Icons.chevron_right, color: Colors.white38),
-              onTap: () => setState(() => _score = (_score + 1) % 100),
-            ),
-          )),
+          const Text('Recent Notes', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          const SizedBox(height: 10),
+          _noteTile('Product Architecture Ideas', 'Drafted 2h ago • System design notes'),
+          _noteTile('Weekly Grocery & Pantry List', 'Drafted yesterday • 12 items'),
+          _noteTile('Reading Quotes: Deep Work', 'Drafted 3 days ago • Cal Newport notes'),
         ],
       ),
     );
   }
 
-  Widget _buildMetric(String t, String v, IconData ic) {
+  Widget _noteTile(String title, String meta) {
     return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(color: AppTheme.surfaceColor, borderRadius: BorderRadius.circular(16)),
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(color: AppTheme.surfaceColor, borderRadius: BorderRadius.circular(14)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(ic, color: AppTheme.secondaryColor, size: 28),
-          const SizedBox(height: 8),
-          Text(t, style: const TextStyle(color: Colors.white60, fontSize: 13)),
-          Text(v, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15), maxLines: 1, overflow: TextOverflow.ellipsis),
+          const SizedBox(height: 4),
+          Text(meta, style: const TextStyle(color: Colors.white60, fontSize: 12)),
         ],
       ),
     );
   }
 }
+
